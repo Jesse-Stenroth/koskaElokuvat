@@ -11,6 +11,18 @@ public class Movie {
     private String mediumImagePortrait;
     private String LargeImageLandscape;
 
+    public Movie(int ID, int length, int year, String title, String ratingImageURL, String genres, String synopsis, String mediumImagePortrait, String largeImageLandscape) {
+        this.ID = ID;
+        Length = length;
+        this.year = year;
+        this.title = title;
+        this.ratingImageURL = ratingImageURL;
+        this.genres = genres;
+        Synopsis = synopsis;
+        this.mediumImagePortrait = mediumImagePortrait;
+        LargeImageLandscape = largeImageLandscape;
+    }
+
     public int getID() {
         return ID;
     }
