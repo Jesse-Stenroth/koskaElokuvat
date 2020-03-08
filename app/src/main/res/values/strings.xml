@@ -2,4 +2,7 @@
     <string name="app_name">koskaElokuvat</string>
     <string name="time">Time:</string>
     <string name="location">Location:</string>
+    <string name="duration">Duration:</string>
+    <string name="year">Year:</string>
+    <string name="genres">Genres:</string>
 </resources>

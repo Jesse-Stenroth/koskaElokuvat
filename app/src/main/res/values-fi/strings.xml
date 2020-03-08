@@ -3,4 +3,7 @@
     <string name="app_name">koskaElokuvat</string>
     <string name="time">Aika:</string>
     <string name="location">Paikka:</string>
+    <string name="duration">Kesto:</string>
+    <string name="year">Vuosi:</string>
+    <string name="genres">Genret:</string>
 </resources>
