@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import fi.jessestenroth.koskaelokuvat.R;
 
 public class infoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle){
-        Button tv = new Button(getActivity());
-        tv.setText("info");
-        return tv;
+        View view = inflater.inflate(R.layout.info_fragment, container,false);
+        return view;
     }
 }
