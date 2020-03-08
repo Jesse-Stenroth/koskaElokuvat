@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">koskaElokuvat</string>
+    <string name="time">Aika:</string>
+    <string name="location">Paikka:</string>
+</resources>
