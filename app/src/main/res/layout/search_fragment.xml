@@ -13,7 +13,7 @@
             android:layout_height="match_parent"
             android:text="@string/time"/>
         <Spinner
-            android:id="@+id/aika"
+            android:id="@+id/aikaSpinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>
@@ -23,11 +23,11 @@
         android:layout_weight="0.5"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/location"/>
     <Spinner
-        android:id="@+id/paikka"
+        android:id="@+id/paikkaSpinner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     </LinearLayout>
