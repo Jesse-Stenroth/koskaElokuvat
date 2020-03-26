@@ -6,11 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -21,12 +16,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import fi.jessestenroth.koskaelokuvat.fragments.searchFragment;
 
-public class FinnkinoAPIGetter {
+public class FinnkinoAPIGetterNavigation {
     private Spinner aika;
     private Spinner paikka;
     private String codeHelp;
@@ -34,7 +26,7 @@ public class FinnkinoAPIGetter {
     private area data;
     private ArrayList<String> times = new ArrayList<>();
     private searchFragment.sendData callback;
-    public FinnkinoAPIGetter(Spinner time, Spinner location, Context con, searchFragment.sendData call){
+    public FinnkinoAPIGetterNavigation(Spinner time, Spinner location, Context con, searchFragment.sendData call){
         aika = time;
         paikka = location;
         context = con;

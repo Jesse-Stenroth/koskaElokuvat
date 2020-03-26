@@ -11,11 +11,9 @@ public class ShowTime {
     private String title;
     private String theathreID;
     private String TheatreAndAuditorium;
-    private String SpokenLanguage;
-    private List<String> subtitleLanguages;
     private String EventSmallImagePortrait;
 
-    public ShowTime(int ID, String ratingImage, String start, String end, int eventID, String title, String theathreID, String theatreAndAuditorium, String spokenLanguage, List<String> subtitleLanguages, String eventSmallImagePortrait) {
+    public ShowTime(int ID, String ratingImage, String start, String end, int eventID, String title, String theathreID, String theatreAndAuditorium, String eventSmallImagePortrait) {
         this.ID = ID;
         this.ratingImage = ratingImage;
         this.start = start;
@@ -24,8 +22,6 @@ public class ShowTime {
         this.title = title;
         this.theathreID = theathreID;
         TheatreAndAuditorium = theatreAndAuditorium;
-        SpokenLanguage = spokenLanguage;
-        this.subtitleLanguages = subtitleLanguages;
         EventSmallImagePortrait = eventSmallImagePortrait;
     }
 
@@ -59,14 +55,6 @@ public class ShowTime {
 
     public String getTheatreAndAuditorium() {
         return TheatreAndAuditorium;
-    }
-
-    public String getSpokenLanguage() {
-        return SpokenLanguage;
-    }
-
-    public List<String> getSubtitleLanguages() {
-        return subtitleLanguages;
     }
 
     public String getEventSmallImagePortrait() {
