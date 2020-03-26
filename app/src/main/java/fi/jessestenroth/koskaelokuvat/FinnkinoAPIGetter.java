@@ -24,16 +24,21 @@ import java.util.ArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import fi.jessestenroth.koskaelokuvat.fragments.searchFragment;
+
 public class FinnkinoAPIGetter {
     private Spinner aika;
     private Spinner paikka;
+    private String codeHelp;
     private Context context;
     private area data;
     private ArrayList<String> times = new ArrayList<>();
-    public FinnkinoAPIGetter(Spinner time, Spinner location, Context con){
+    private searchFragment.sendData callback;
+    public FinnkinoAPIGetter(Spinner time, Spinner location, Context con, searchFragment.sendData call){
         aika = time;
         paikka = location;
         context = con;
+        callback = call;
     }
 
     public area getAreas(){
@@ -106,9 +111,11 @@ public class FinnkinoAPIGetter {
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     System.out.println(parentView.getItemAtPosition(position).toString());
                     String code = data.getId().get(position);
+                    codeHelp = code;
                     System.out.println("Code: " + code);
                     times = getTimesInList(code);
                     System.out.println("Times: " + times);
+                    callback.clearList();
                 }
 
                 @Override
@@ -190,7 +197,8 @@ public class FinnkinoAPIGetter {
             aika.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    System.out.println("aika: " + parent.getItemAtPosition(position));
+                    System.out.println("aika: " + parent.getItemAtPosition(position).toString());
+                    callback.sendDataToList(codeHelp, parent.getItemAtPosition(position).toString());
                 }
 
                 @Override

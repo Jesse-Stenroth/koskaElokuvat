@@ -16,15 +16,25 @@ import fi.jessestenroth.koskaelokuvat.ShowTimeAdapter;
 
 public class ListFragment extends Fragment {
     private ArrayList<ShowTime> l = new ArrayList<>();
+    private ListView lista;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle){
         View view = inflater.inflate(R.layout.list_fragment, container,false);
-        ListView lista = (ListView) view.findViewById(R.id.fullList);
+        lista = (ListView) view.findViewById(R.id.fullList);
+        updateList();
+        return view;
+    }
+    public void clearList(){
+
+    }
+    public void updateData(String day, String areaId){
+
+    }
+    public void updateList(){
         List<String> kielet = new ArrayList<>();
         kielet.add("Suomi");
         kielet.add("Ruotsi");
         l.add(new ShowTime(123, "fsf","14:00","16:00",13212, "Matkalla", "1233", "Sali 3", "Suomi", kielet, "fff"));
         l.add(new ShowTime(122, "ff","15:00","17:00",13212, "Matkalla", "1233", "Sali 3", "Suomi", kielet, "fff"));
         lista.setAdapter(new ShowTimeAdapter(getActivity(), l));
-        return view;
     }
 }
