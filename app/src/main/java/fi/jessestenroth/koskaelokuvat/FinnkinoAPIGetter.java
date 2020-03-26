@@ -1,6 +1,11 @@
 package fi.jessestenroth.koskaelokuvat;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -20,6 +25,16 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 public class FinnkinoAPIGetter {
+    private Spinner aika;
+    private Spinner paikka;
+    private Context context;
+    private area data;
+    private ArrayList<String> times = new ArrayList<>();
+    public FinnkinoAPIGetter(Spinner time, Spinner location, Context con){
+        aika = time;
+        paikka = location;
+        context = con;
+    }
 
     public area getAreas(){
         readAreaFeed xml = new readAreaFeed();
@@ -27,6 +42,7 @@ public class FinnkinoAPIGetter {
         ArrayList<String> id = xml.getIds();
         ArrayList<String> name = xml.getNames();
         area out = new area(id, name);
+        data = out;
         return out;
     }
 
@@ -41,7 +57,6 @@ public class FinnkinoAPIGetter {
         ArrayList<String> names = new ArrayList();
         @Override
         protected Object doInBackground(Object[] objects) {
-
             try {
                 url = new URL("https://www.finnkino.fi/xml/TheatreAreas/");
 
@@ -81,6 +96,28 @@ public class FinnkinoAPIGetter {
 
             return ids;
         }
+        protected void onPostExecute(Object obj){
+            ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, data.getName());
+            arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            paikka.setAdapter(arrayAdapter2);
+
+            paikka.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    System.out.println(parentView.getItemAtPosition(position).toString());
+                    String code = data.getId().get(position);
+                    System.out.println("Code: " + code);
+                    times = getTimesInList(code);
+                    System.out.println("Times: " + times);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
+
+            });
+        }
 
 
         public InputStream getInputStream(URL url) {
@@ -110,7 +147,6 @@ public class FinnkinoAPIGetter {
         }
         @Override
         protected Object doInBackground(Object[] objects) {
-
             try {
                 url = new URL("https://www.finnkino.fi/xml/ScheduleDates/?area=" + code);
 
@@ -146,6 +182,22 @@ public class FinnkinoAPIGetter {
             }
 
             return times;
+        }
+        protected void onPostExecute(Object obj){
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, times);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            aika.setAdapter(arrayAdapter);
+            aika.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    System.out.println("aika: " + parent.getItemAtPosition(position));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
 
