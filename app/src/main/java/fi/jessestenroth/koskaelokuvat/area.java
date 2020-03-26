@@ -1,19 +1,21 @@
 package fi.jessestenroth.koskaelokuvat;
 
-public class area {
-    private String id;
-    private String name;
+import java.util.ArrayList;
 
-    public area(String id, String name) {
+public class area {
+    private ArrayList<String> id;
+    private ArrayList<String> name;
+
+    public area(ArrayList<String> id, ArrayList<String> name) {
         this.id = id;
         this.name = name;
     }
 
-    public String getId() {
+    public ArrayList<String> getId() {
         return id;
     }
 
-    public String getName() {
+    public ArrayList<String> getName() {
         return name;
     }
 }
