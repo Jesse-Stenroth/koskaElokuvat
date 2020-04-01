@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<Schedule xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <PubDate>2016-07-07T00:00:00+03:00</PubDate>
+    <Shows>
+        <Show>
+            <ID>914232</ID>
+            <dtAccounting>2016-07-08T00:00:00</dtAccounting>
+            <dttmShowStart>2016-07-08T10:30:00</dttmShowStart>
+            <dttmShowStartUTC>2016-07-08T07:30:00Z</dttmShowStartUTC>
+            <dttmShowEnd>2016-07-08T12:19:00</dttmShowEnd>
+            <dttmShowEndUTC>2016-07-08T09:19:00Z</dttmShowEndUTC>
+            <ShowSalesStartTime>2000-01-01T00:00:00</ShowSalesStartTime>
+            <ShowSalesStartTimeUTC>2000-01-01T00:00:00Z</ShowSalesStartTimeUTC>
+            <ShowSalesEndTime>2016-07-08T10:15:00</ShowSalesEndTime>
+            <ShowSalesEndTimeUTC>2016-07-08T07:15:00Z</ShowSalesEndTimeUTC>
+            <ShowReservationStartTime>2000-01-01T00:00:00</ShowReservationStartTime>
+            <ShowReservationStartTimeUTC>2000-01-01T00:00:00Z</ShowReservationStartTimeUTC>
+            <ShowReservationEndTime>2016-07-08T09:00:00</ShowReservationEndTime>
+            <ShowReservationEndTimeUTC>2016-07-08T06:00:00Z</ShowReservationEndTimeUTC>
+            <EventID>300756</EventID>
+            <Title>Miekkailija</Title>
+            <OriginalTitle>Miekkailija</OriginalTitle>
+            <ProductionYear>2015</ProductionYear>
+            <LengthInMinutes>99</LengthInMinutes>
+            <dtLocalRelease>2015-03-13T00:00:00</dtLocalRelease>
+            <Rating>7</Rating>
+            <RatingLabel>7</RatingLabel>
+            <RatingImageUrl>https://media.finnkino.fi/images/rating_large_7.png</RatingImageUrl>
+            <EventType>Movie</EventType>
+            <Genres>Draama</Genres>
+            <TheatreID>1038</TheatreID>
+            <TheatreAuditriumID>1267</TheatreAuditriumID>
+            <Theatre>Tennispalatsi, Helsinki</Theatre>
+            <TheatreAuditorium>sali 9</TheatreAuditorium>
+            <TheatreAndAuditorium>Tennispalatsi, Helsinki, sali 9</TheatreAndAuditorium>
+            <PresentationMethodAndLanguage>Estonian</PresentationMethodAndLanguage>
+            <PresentationMethod />
+            <EventSeries />
+            <ShowURL>http://www.finnkino.fi/Websales/Show/914232/</ShowURL>
+            <EventURL>http://www.finnkino.fi/Event/300756/</EventURL>
+            <Images>
+                <EventMicroImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_micro/Miekkailija_1080.jpg</EventMicroImagePortrait>
+                <EventSmallImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_small/Miekkailija_1080.jpg</EventSmallImagePortrait>
+                <EventMediumImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_medium/Miekkailija_1080.jpg</EventMediumImagePortrait>
+                <EventLargeImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_small/Miekkailija_1080.jpg</EventLargeImagePortrait>
+                <EventSmallImageLandscape>http://media.finnkino.fi/1012/Event_10089/landscape_small/Miekkailija_444.jpg</EventSmallImageLandscape>
+                <EventLargeImageLandscape>http://media.finnkino.fi/1012/Event_10089/landscape_large/Miekkailija_670.jpg</EventLargeImageLandscape>
+            </Images>
+            <ContentDescriptors>
+                <ContentDescriptor>
+                    <Name>Disturbing</Name>
+                    <ImageURL>https://media.finnkino.fi/images/content_Disturbing.png</ImageURL>
+                </ContentDescriptor>
+            </ContentDescriptors>
+        </Show>
+    </Shows>
+</Schedule>

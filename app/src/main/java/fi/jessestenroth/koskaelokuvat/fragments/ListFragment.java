@@ -34,5 +34,9 @@ public class ListFragment extends Fragment {
     }
     public void updateList(){
         lista.setAdapter(new ShowTimeAdapter(getActivity(), l));
+        lista.setOnItemClickListener((parent, view, position, id) -> {
+            int event = l.get((int) id).getEventID();
+
+        });
     }
 }

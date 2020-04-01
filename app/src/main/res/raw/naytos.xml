@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<Events xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Event>
+        <ID>300756</ID>
+        <Title>Miekkailija</Title>
+        <OriginalTitle>Miekkailija</OriginalTitle>
+        <ProductionYear>2015</ProductionYear>
+        <LengthInMinutes>99</LengthInMinutes>
+        <dtLocalRelease>2015-03-13T00:00:00</dtLocalRelease>
+        <Rating>7</Rating>
+        <RatingLabel>7</RatingLabel>
+        <RatingImageUrl>https://media.finnkino.fi/images/rating_large_7.png</RatingImageUrl>
+        <LocalDistributorName>Nordisk Film</LocalDistributorName>
+        <GlobalDistributorName>Nordisk Film</GlobalDistributorName>
+        <ProductionCompanies>-</ProductionCompanies>
+        <EventType>Movie</EventType>
+        <Genres>Draama</Genres>
+        <ShortSynopsis>Nuori tuntematon mies, Endel, saapuu Haapsaluun 1950-luvun alussa. Hän on jättänyt taakseen Leningradin valtion urheiluyliopiston pakoillakseen Neuvostoliiton salaista poliisia. Haapsalussa hän saa viran opettajana ja alkaa vetää lapsille urheilukerhoa. Endel alkaa vihkiä lapsia suureen intohimoonsa – miekkailuun.</ShortSynopsis>
+        <Synopsis>Nuori tuntematon mies, Endel, saapuu Haapsaluun 1950-luvun alussa. Hän on jättänyt taakseen Leningradin valtion urheiluyliopiston pakoillakseen Neuvostoliiton salaista poliisia. Haapsalussa hän saa viran opettajana ja alkaa vetää lapsille urheilukerhoa. Endel alkaa vihkiä lapsia suureen intohimoonsa – miekkailuun. Tämä ajaa hänet törmäyskurssille koulun rehtorin, kommunistisen byrokraatin kanssa.
+
+            Endel oppii rakastamaan ja pitämään huolta lapsista, joista suuri osa on neuvostomiehityksen jäljiltä orpoja. Miekkailusta muodostuu lapsille itseilmaisun muoto ja Endelistä heille miehen malli.
+
+            Rehtori selvittää Endelin taustan. Lapset haluavat lähteä Leningradiin valtakunnalliseen koululaisten miekkailuturnaukseen. Endel joutuu tekemään valinnan; viekö hän lapset Leningradiin ja riskeeraa oman vapautensa vai aiheuttaako hän heille pettymyksen valitsemalla oman turvallisuutensa ja ikuisen pakoilun.</Synopsis>
+        <EventURL>http://www.finnkino.fi/Event/300756/</EventURL>
+        <Images>
+            <EventMicroImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_micro/Miekkailija_1080.jpg</EventMicroImagePortrait>
+            <EventSmallImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_small/Miekkailija_1080.jpg</EventSmallImagePortrait>
+            <EventMediumImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_medium/Miekkailija_1080.jpg</EventMediumImagePortrait>
+            <EventLargeImagePortrait>http://media.finnkino.fi/1012/Event_10089/portrait_small/Miekkailija_1080.jpg</EventLargeImagePortrait>
+            <EventSmallImageLandscape>http://media.finnkino.fi/1012/Event_10089/landscape_small/Miekkailija_444.jpg</EventSmallImageLandscape>
+            <EventLargeImageLandscape>http://media.finnkino.fi/1012/Event_10089/landscape_large/Miekkailija_670.jpg</EventLargeImageLandscape>
+        </Images>
+        <Videos>
+            <EventVideo>
+                <Title>Katso traileri</Title>
+                <Location>http://fin.clip-1.filmtrailer.com/16432_60237_a_6.mp4</Location>
+                <ThumbnailLocation />
+                <MediaResourceSubType>EventTrailer</MediaResourceSubType>
+                <MediaResourceFormat>Unspecified</MediaResourceFormat>
+            </EventVideo>
+        </Videos>
+        <Cast>
+            <Actor>
+                <FirstName>Märt</FirstName>
+                <LastName>Avandi</LastName>
+            </Actor>
+            <Actor>
+                <FirstName>Ursula</FirstName>
+                <LastName>Ratasepp</LastName>
+            </Actor>
+            <Actor>
+                <FirstName>Hendrik</FirstName>
+                <LastName>Toompere</LastName>
+            </Actor>
+        </Cast>
+        <Directors>
+            <Director>
+                <FirstName>Klaus</FirstName>
+                <LastName>Häro</LastName>
+            </Director>
+        </Directors>
+        <ContentDescriptors>
+            <ContentDescriptor>
+                <Name>Disturbing</Name>
+                <ImageURL>https://media.finnkino.fi/images/content_Disturbing.png</ImageURL>
+            </ContentDescriptor>
+        </ContentDescriptors>
+    </Event>
+</Events>
