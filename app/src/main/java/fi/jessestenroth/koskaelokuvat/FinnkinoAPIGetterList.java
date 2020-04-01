@@ -65,6 +65,7 @@ public class FinnkinoAPIGetterList {
                 List<String> theatre = new ArrayList<>();
                 List<String> auditorium = new ArrayList<>();
                 List<String> image = new ArrayList<>();
+                List<String> tickets = new ArrayList<>();
                 int eventType = xpp.getEventType();
                 //read data from schedules
                 while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -102,6 +103,9 @@ public class FinnkinoAPIGetterList {
                         } else if (xpp.getName().equalsIgnoreCase("EventSmallImagePortrait")) {
                             if (insideItem)
                                 image.add(xpp.nextText());
+                        } else if (xpp.getName().equalsIgnoreCase("ShowURL")) {
+                            if (insideItem)
+                                tickets.add(xpp.nextText());
                         }
                     } else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("Show")) {
                         insideItem = false;
@@ -110,7 +114,7 @@ public class FinnkinoAPIGetterList {
                 }
                 ArrayList<ShowTime> listHelp = new ArrayList<>();
                 for(int lap=0; lap < ids.size(); lap++){
-                    listHelp.add(new ShowTime(Integer.parseInt(ids.get(lap)), rating.get(lap), start.get(lap), end.get(lap), Integer.parseInt(event.get(lap)), title.get(lap), theatre.get(lap), auditorium.get(lap), image.get(lap)));
+                    listHelp.add(new ShowTime(Integer.parseInt(ids.get(lap)), rating.get(lap), start.get(lap), end.get(lap), Integer.parseInt(event.get(lap)), title.get(lap), theatre.get(lap), auditorium.get(lap), image.get(lap), tickets.get(lap)));
                 }
                 list = listHelp;
                 return listHelp;

@@ -44,10 +44,10 @@ public class ListFragment extends Fragment {
         lista.setOnItemClickListener((parent, view, position, id) -> {
             ShowTime help = l.get((int) id);
             int event = help.getEventID();
-            callback.sendEvent(event, help.getStart() + " - " + help.getEnd(), help.getTheatreAndAuditorium());
+            callback.sendEvent(event, help.getStart() + " - " + help.getEnd(), help.getTheatreAndAuditorium(), help.getTicket());
         });
     }
     public interface sendToInfo{
-        public void sendEvent(int event, String time, String location);
+        public void sendEvent(int event, String time, String location, String ticket);
     }
 }

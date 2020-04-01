@@ -33,24 +33,28 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         lf.clearList();
     }
 
-    private void updateInfoFragment(int event, infoFragment info) {
+    private void updateInfoFragment(int event, infoFragment info, String time, String location, String ticket) {
         info.updateInfo(event);
+        info.changeTime(time);
+        info.changeLocation(location);
+        info.changeTicket(ticket);
     }
-    private void startNewActivity(int event, String time, String location) {
+    private void startNewActivity(int event, String time, String location, String ticket) {
         Intent showInfo = new Intent(this, Main2Activity.class);
         showInfo.putExtra("event", event);
         showInfo.putExtra("time", time);
         showInfo.putExtra("location", location);
+        showInfo.putExtra("ticket", ticket);
         startActivity(showInfo);
     }
 
     @Override
-    public void sendEvent(int event, String time, String location) {
+    public void sendEvent(int event, String time, String location, String ticket) {
         infoFragment info = (infoFragment) getSupportFragmentManager().findFragmentById(R.id.info);
         if(info == null){
-            startNewActivity(event, time, location);
+            startNewActivity(event, time, location, ticket);
         } else{
-            updateInfoFragment(event, info);
+            updateInfoFragment(event, info, time, location, ticket);
         }
     }
 }

@@ -12,8 +12,9 @@ public class ShowTime {
     private String theathreID;
     private String TheatreAndAuditorium;
     private String EventSmallImagePortrait;
+    private String Ticket;
 
-    public ShowTime(int ID, String ratingImage, String start, String end, int eventID, String title, String theathreID, String theatreAndAuditorium, String eventSmallImagePortrait) {
+    public ShowTime(int ID, String ratingImage, String start, String end, int eventID, String title, String theathreID, String theatreAndAuditorium, String eventSmallImagePortrait, String ticketBuy) {
         this.ID = ID;
         this.ratingImage = ratingImage;
         setStartAndEnd(start, end);
@@ -22,6 +23,7 @@ public class ShowTime {
         this.theathreID = theathreID;
         TheatreAndAuditorium = theatreAndAuditorium;
         EventSmallImagePortrait = eventSmallImagePortrait;
+        this.Ticket = ticketBuy;
     }
 
     private void setStartAndEnd(String start, String end) {
@@ -29,6 +31,10 @@ public class ShowTime {
         String[] ends = end.split("T");
         this.end = ends[1];
         this.start = starts[1];
+    }
+
+    public String getTicket() {
+        return Ticket;
     }
 
     public int getID() {

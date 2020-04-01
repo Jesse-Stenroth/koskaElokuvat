@@ -17,5 +17,6 @@ public class Main2Activity extends AppCompatActivity {
         info.changeTime(i.getStringExtra("time"));
         info.changeLocation(i.getStringExtra("location"));
         info.updateInfo(i.getIntExtra("event", 0));
+        info.changeTicket(i.getStringExtra("ticket"));
     }
 }

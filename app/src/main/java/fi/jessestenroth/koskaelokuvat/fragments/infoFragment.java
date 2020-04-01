@@ -27,6 +27,7 @@ public class infoFragment extends Fragment {
     private TextView kesto;
     private TextView title;
     private ImageView imagee;
+    private String ticket;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle){
         view = inflater.inflate(R.layout.info_fragment, container,false);
         imagee = (ImageView) view.findViewById(R.id.movieImage);
@@ -51,5 +52,8 @@ public class infoFragment extends Fragment {
     }
     public void changeLocation(String text){
         this.location.setText(text);
+    }
+    public void changeTicket(String Ticket){
+        this.ticket = Ticket;
     }
 }
