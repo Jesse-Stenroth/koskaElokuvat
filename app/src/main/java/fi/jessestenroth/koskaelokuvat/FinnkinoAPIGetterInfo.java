@@ -145,10 +145,6 @@ public class FinnkinoAPIGetterInfo {
             vuosi.setText(movie.getYear() + " ");
             genre.setText(movie.getGenres());
             synopsis.setText(movie.getSynopsis());
-            //siirretaan
-            timeView.setText(show.getStart() + " - " + show.getEnd());
-            location.setText(show.getTheatreAndAuditorium());
-            //siirrettava loppuu
             try {
                 URL image = new URL(movie.getMediumImagePortrait());
                 Bitmap bitmap = BitmapFactory.decodeStream(image.openConnection().getInputStream());
