@@ -42,11 +42,12 @@ public class ListFragment extends Fragment {
     public void updateList(){
         lista.setAdapter(new ShowTimeAdapter(getActivity(), l));
         lista.setOnItemClickListener((parent, view, position, id) -> {
-            int event = l.get((int) id).getEventID();
-            callback.sendEvent(event);
+            ShowTime help = l.get((int) id);
+            int event = help.getEventID();
+            callback.sendEvent(event, help.getStart() + " - " + help.getEnd(), help.getTheatreAndAuditorium());
         });
     }
     public interface sendToInfo{
-        public void sendEvent(int event);
+        public void sendEvent(int event, String time, String location);
     }
 }

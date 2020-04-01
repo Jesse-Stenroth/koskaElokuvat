@@ -17,32 +17,39 @@ import fi.jessestenroth.koskaelokuvat.R;
 import fi.jessestenroth.koskaelokuvat.ShowTime;
 
 public class infoFragment extends Fragment {
-    private List<String> l = new ArrayList<>();
-    private ShowTime show;
-    private Movie movie;
     private View view;
+    private TextView time;
+    private TextView location;
+    private TextView synopsis;
+    private TextView genre;
+    private ImageView rating;
+    private TextView vuosi;
+    private TextView kesto;
+    private TextView title;
+    private ImageView imagee;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle){
         view = inflater.inflate(R.layout.info_fragment, container,false);
-        movie = new Movie(12322,120,1400,"Maailmalla","","komedia","Mnnfi3firiniIWEFI3QWNFWIJNFGWIEJfnjwfijenwfijwnefiwkljnfiwejgknweoifjnegienwgje","","");
-        l.add("Suomi");
-        l.add("Ruotsi");
-        show = new ShowTime(123,"","14:00","17:00",1234,"Maailmalla","12334","Sali 3, Tampere","Suomi");
-
+        imagee = (ImageView) view.findViewById(R.id.movieImage);
+        title = (TextView) view.findViewById(R.id.movieTitle);
+        kesto = (TextView) view.findViewById(R.id.kesto);
+        vuosi = (TextView) view.findViewById(R.id.year);
+        rating = (ImageView) view.findViewById(R.id.rating);
+        genre = (TextView) view.findViewById(R.id.genre);
+        synopsis = (TextView) view.findViewById(R.id.synopsis);
+        time = (TextView) view.findViewById(R.id.movieTime);
+        location = (TextView) view.findViewById(R.id.movieLocation);
         return view;
     }
     public void updateInfo(int event){
 
         //update elements
-        ImageView imagee = (ImageView) view.findViewById(R.id.movieImage);
-        TextView title = (TextView) view.findViewById(R.id.movieTitle);
-        TextView kesto = (TextView) view.findViewById(R.id.kesto);
-        TextView vuosi = (TextView) view.findViewById(R.id.year);
-        ImageView rating = (ImageView) view.findViewById(R.id.rating);
-        TextView genre = (TextView) view.findViewById(R.id.genre);
-        TextView synopsis = (TextView) view.findViewById(R.id.synopsis);
-        TextView time = (TextView) view.findViewById(R.id.movieTime);
-        TextView location = (TextView) view.findViewById(R.id.movieLocation);
         FinnkinoAPIGetterInfo getterInfo = new FinnkinoAPIGetterInfo(getActivity(), event, imagee, title, kesto, vuosi, rating, genre, synopsis, time, location);
 
+    }
+    public void changeTime(String text){
+        this.time.setText(text);
+    }
+    public void changeLocation(String text){
+        this.location.setText(text);
     }
 }

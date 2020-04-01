@@ -3,6 +3,7 @@ package fi.jessestenroth.koskaelokuvat;
 import androidx.appcompat.app.AppCompatActivity;
 import fi.jessestenroth.koskaelokuvat.fragments.infoFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 public class Main2Activity extends AppCompatActivity {
@@ -12,6 +13,9 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         infoFragment info = (infoFragment) getSupportFragmentManager().findFragmentById(R.id.info);
-        info.updateInfo(getIntent().getIntExtra("event", 0));
+        Intent i = getIntent();
+        info.changeTime(i.getStringExtra("time"));
+        info.changeLocation(i.getStringExtra("location"));
+        info.updateInfo(i.getIntExtra("event", 0));
     }
 }

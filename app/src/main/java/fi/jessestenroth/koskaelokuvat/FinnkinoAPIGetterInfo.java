@@ -67,68 +67,6 @@ public class FinnkinoAPIGetterInfo {
         protected Object doInBackground(Object[] objects) {
             try {
                 url = new URL("https://www.finnkino.fi/xml/Events/?eventID=" + ev);
-                url2 = new URL("https://www.finnkino.fi/xml/Schedule/?eventID=" + ev);
-
-                //get showtime data
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                factory.setNamespaceAware(false);
-                XmlPullParser xpp = factory.newPullParser();
-                xpp.setInput(getInputStream(url2), "UTF_8");
-                boolean insideItem = false;
-                String ids = "";
-                String rating = "";
-                String start = "";
-                String end = "";
-                String event = "";
-                String title = "";
-                String theatre = "";
-                String auditorium = "";
-                String image = "";
-                int eventType = xpp.getEventType();
-                //read data from schedules
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    if (eventType == XmlPullParser.START_TAG) {
-
-                        if (xpp.getName().equalsIgnoreCase("Show")) {
-                            insideItem = true;
-                        } else if (xpp.getName().equalsIgnoreCase("ID")) {
-                            if (insideItem)
-                                ids = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("RatingImageUrl")) {
-                            if (insideItem)
-                                rating = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("dttmShowStart")) {
-                            if (insideItem)
-                                start = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("dttmShowEnd")) {
-                            if (insideItem)
-                                end = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("EventID")) {
-                            if (insideItem)
-                                event = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("Title") && suomeksi) {
-                            if (insideItem)
-                                title = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("OriginalTitle") && !suomeksi) {
-                            if (insideItem)
-                                title = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("TheatreID")) {
-                            if (insideItem)
-                                theatre = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("TheatreAndAuditorium")) {
-                            if (insideItem)
-                                auditorium = xpp.nextText();
-                        } else if (xpp.getName().equalsIgnoreCase("EventSmallImagePortrait")) {
-                            if (insideItem)
-                                image = xpp.nextText();
-                        }
-                    } else if (eventType == XmlPullParser.END_TAG && xpp.getName().equalsIgnoreCase("Show")) {
-                        insideItem = false;
-                    }
-                    eventType = xpp.next(); //move to next element
-                }
-                ShowTime show = new ShowTime(Integer.parseInt(ids), rating, start, end, Integer.parseInt(event), title, theatre, auditorium, image);
-                this.time = show;
                 //get movie data
                 XmlPullParserFactory factory2 = XmlPullParserFactory.newInstance();
                 factory2.setNamespaceAware(false);
@@ -207,8 +145,10 @@ public class FinnkinoAPIGetterInfo {
             vuosi.setText(movie.getYear() + " ");
             genre.setText(movie.getGenres());
             synopsis.setText(movie.getSynopsis());
+            //siirretaan
             timeView.setText(show.getStart() + " - " + show.getEnd());
             location.setText(show.getTheatreAndAuditorium());
+            //siirrettava loppuu
             try {
                 URL image = new URL(movie.getMediumImagePortrait());
                 Bitmap bitmap = BitmapFactory.decodeStream(image.openConnection().getInputStream());

@@ -16,13 +16,19 @@ public class ShowTime {
     public ShowTime(int ID, String ratingImage, String start, String end, int eventID, String title, String theathreID, String theatreAndAuditorium, String eventSmallImagePortrait) {
         this.ID = ID;
         this.ratingImage = ratingImage;
-        this.start = start;
-        this.end = end;
+        setStartAndEnd(start, end);
         this.eventID = eventID;
         this.title = title;
         this.theathreID = theathreID;
         TheatreAndAuditorium = theatreAndAuditorium;
         EventSmallImagePortrait = eventSmallImagePortrait;
+    }
+
+    private void setStartAndEnd(String start, String end) {
+        String[] starts = start.split("T");
+        String[] ends = end.split("T");
+        this.end = ends[1];
+        this.start = starts[1];
     }
 
     public int getID() {
