@@ -1,8 +1,6 @@
 package fi.jessestenroth.koskaelokuvat;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -151,12 +149,8 @@ public class FinnkinoAPIGetterInfo {
             genre.setText(movie.getGenres());
             synopsis.setText(movie.getSynopsis());
             try {
-                URL image = new URL(movie.getMediumImagePortrait());
-                Bitmap bitmap = BitmapFactory.decodeStream(image.openConnection().getInputStream());
-                imagee.setImageBitmap(bitmap);
-                URL r = new URL(movie.getRatingImageURL());
-                Bitmap bitmap1 = BitmapFactory.decodeStream(r.openConnection().getInputStream());
-                rating.setImageBitmap(bitmap1);
+                new ImageLoadTask(movie.getMediumImagePortrait(), imagee).execute();
+                new ImageLoadTask(movie.getRatingImageURL(), rating).execute();
             } catch (Exception e){
                 e.printStackTrace();
             }
