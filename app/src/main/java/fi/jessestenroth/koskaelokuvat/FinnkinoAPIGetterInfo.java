@@ -82,6 +82,7 @@ public class FinnkinoAPIGetterInfo {
                 String syn = "";
                 String mediumImage = "";
                 String largeImage = "";
+                boolean titleMissing = true;
                 int eventType2 = xpp2.getEventType();
                 while (eventType2 != XmlPullParser.END_DOCUMENT) {
                     if (eventType2 == XmlPullParser.START_TAG) {
@@ -97,12 +98,16 @@ public class FinnkinoAPIGetterInfo {
                         } else if (xpp2.getName().equalsIgnoreCase("ProductionYear")) {
                             if (insideItem2)
                                 year = xpp2.nextText();
-                        } else if (xpp2.getName().equalsIgnoreCase("Title") && suomeksi) {
-                            if (insideItem2)
+                        } else if (xpp2.getName().equalsIgnoreCase("Title") && suomeksi && titleMissing) {
+                            if (insideItem2) {
                                 titlee = xpp2.nextText();
-                        } else if (xpp2.getName().equalsIgnoreCase("OriginalTitle") && !suomeksi) {
-                            if (insideItem2)
+                                titleMissing = false;
+                            }
+                        } else if (xpp2.getName().equalsIgnoreCase("OriginalTitle") && !suomeksi && titleMissing) {
+                            if (insideItem2) {
                                 titlee = xpp2.nextText();
+                                titleMissing = false;
+                            }
                         } else if (xpp2.getName().equalsIgnoreCase("RatingImageUrl")) {
                             if (insideItem2)
                                 rat = xpp2.nextText();
