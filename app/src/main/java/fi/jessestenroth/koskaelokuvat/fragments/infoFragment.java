@@ -24,7 +24,7 @@ public class infoFragment extends Fragment {
         movie = new Movie(12322,120,1400,"Maailmalla","","komedia","Mnnfi3firiniIWEFI3QWNFWIJNFGWIEJfnjwfijenwfijwnefiwkljnfiwejgknweoifjnegienwgje","","");
         l.add("Suomi");
         l.add("Ruotsi");
-        show = new ShowTime(123,"","14:00","17:00",1234,"Maailmalla","12334","Sali 3, Tampere","Suomi", l, "");
+        show = new ShowTime(123,"","14:00","17:00",1234,"Maailmalla","12334","Sali 3, Tampere","Suomi");
         ImageView imagee = (ImageView) view.findViewById(R.id.movieImage);
         TextView title = (TextView) view.findViewById(R.id.movieTitle);
         TextView kesto = (TextView) view.findViewById(R.id.kesto);
@@ -42,5 +42,8 @@ public class infoFragment extends Fragment {
         time.setText(show.getStart());
         location.setText(show.getTheatreAndAuditorium());
         return view;
+    }
+    public void updateInfo(int event){
+
     }
 }

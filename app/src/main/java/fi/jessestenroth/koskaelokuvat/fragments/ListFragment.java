@@ -1,5 +1,6 @@
 package fi.jessestenroth.koskaelokuvat.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ public class ListFragment extends Fragment {
     private ArrayList<ShowTime> l = new ArrayList<>();
     private ListView lista;
     private FinnkinoAPIGetterList xml;
+    private sendToInfo callback;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle){
         View view = inflater.inflate(R.layout.list_fragment, container,false);
         lista = (ListView) view.findViewById(R.id.fullList);
@@ -29,6 +31,11 @@ public class ListFragment extends Fragment {
         l.clear();
         updateList();
     }
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        callback = (sendToInfo) context;
+    }
     public void updateData(String day, String areaId){
         l = xml.getData(day, areaId);
     }
@@ -38,5 +45,8 @@ public class ListFragment extends Fragment {
             int event = l.get((int) id).getEventID();
 
         });
+    }
+    public interface sendToInfo{
+        public void sendEvent(int event);
     }
 }
