@@ -21,7 +21,7 @@ import fi.jessestenroth.koskaelokuvat.fragments.searchFragment;
 public class FinnkinoAPIGetterNavigation {
     private Spinner aika;
     private Spinner paikka;
-    private String codeHelp;
+    private String codeHelp = "1029";
     private Context context;
     private area data;
     private ArrayList<String> times = new ArrayList<>();
@@ -112,10 +112,11 @@ public class FinnkinoAPIGetterNavigation {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parentView) {
-                    // your code here
+
                 }
 
             });
+
         }
 
 
@@ -195,7 +196,6 @@ public class FinnkinoAPIGetterNavigation {
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-
                 }
             });
         }
