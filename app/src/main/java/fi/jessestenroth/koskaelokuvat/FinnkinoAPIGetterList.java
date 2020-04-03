@@ -53,7 +53,7 @@ public class FinnkinoAPIGetterList {
         protected Object doInBackground(Object[] objects) {
             try {
                 url = new URL("https://www.finnkino.fi/xml/Schedule/?area=" + area + "&dt=" + day);
-
+                System.out.println("https://www.finnkino.fi/xml/Schedule/?area=" + area + "&dt=" + day);
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(false);
                 XmlPullParser xpp = factory.newPullParser();

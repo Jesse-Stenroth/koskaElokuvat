@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
 
     @Override
     public void sendDataToList(String areaId, String time) {
+        lf.clearList();
         lf.updateData(time, areaId);
     }
 

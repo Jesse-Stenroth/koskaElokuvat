@@ -3,6 +3,7 @@ package fi.jessestenroth.koskaelokuvat;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -97,17 +98,15 @@ public class FinnkinoAPIGetterNavigation {
             ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, data.getName());
             arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             paikka.setAdapter(arrayAdapter2);
-
             paikka.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    System.out.println(parentView.getItemAtPosition(position).toString());
                     String code = data.getId().get(position);
                     codeHelp = code;
                     System.out.println("Code: " + code);
-                    times = getTimesInList(code);
-                    System.out.println("Times: " + times);
+                    times = getTimesInList(codeHelp);
                     callback.clearList();
+
                 }
 
                 @Override
@@ -149,6 +148,7 @@ public class FinnkinoAPIGetterNavigation {
         protected Object doInBackground(Object[] objects) {
             try {
                 url = new URL("https://www.finnkino.fi/xml/ScheduleDates/?area=" + code);
+                System.out.println("https://www.finnkino.fi/xml/ScheduleDates/?area=" + code);
 
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 factory.setNamespaceAware(false);
