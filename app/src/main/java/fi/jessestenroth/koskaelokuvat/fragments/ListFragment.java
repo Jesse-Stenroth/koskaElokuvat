@@ -37,6 +37,9 @@ public class ListFragment extends Fragment {
         super.onAttach(context);
         callback = (sendToInfo) context;
     }
+    public void changeArrayList(ArrayList<ShowTime> in){
+        this.l = in;
+    }
     public void updateData(String day, String areaId){
         l = xml.getData(day, areaId);
     }

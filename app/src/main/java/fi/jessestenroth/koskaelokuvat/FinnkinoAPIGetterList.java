@@ -120,6 +120,7 @@ public class FinnkinoAPIGetterList {
                     listHelp.add(new ShowTime(Integer.parseInt(ids.get(lap)), rating.get(lap), start.get(lap), end.get(lap), Integer.parseInt(event.get(lap)), title.get(lap), theatre.get(lap), auditorium.get(lap), image.get(lap), tickets.get(lap)));
                 }
                 list = listHelp;
+                out = listHelp;
                 return listHelp;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -131,6 +132,7 @@ public class FinnkinoAPIGetterList {
             return null;
         }
         protected void onPostExecute(Object obj){
+            Lfragment.changeArrayList(out);
             Lfragment.updateList();
         }
         public InputStream getInputStream(URL url) {
