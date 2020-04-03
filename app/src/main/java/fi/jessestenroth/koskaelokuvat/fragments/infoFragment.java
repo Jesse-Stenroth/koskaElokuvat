@@ -1,9 +1,12 @@
 package fi.jessestenroth.koskaelokuvat.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +30,8 @@ public class infoFragment extends Fragment {
     private TextView kesto;
     private TextView title;
     private ImageView imagee;
-    private String ticket;
+    private Button osta;
+    private String ticket = "";
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle){
         view = inflater.inflate(R.layout.info_fragment, container,false);
         imagee = (ImageView) view.findViewById(R.id.movieImage);
@@ -39,6 +43,11 @@ public class infoFragment extends Fragment {
         synopsis = (TextView) view.findViewById(R.id.synopsis);
         time = (TextView) view.findViewById(R.id.movieTime);
         location = (TextView) view.findViewById(R.id.movieLocation);
+        osta = (Button) view.findViewById(R.id.buyButton);
+        osta.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ticket));
+            startActivity(browserIntent);
+        });
         return view;
     }
     public void updateInfo(int event){
