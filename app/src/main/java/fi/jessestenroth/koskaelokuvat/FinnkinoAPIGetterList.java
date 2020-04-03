@@ -14,6 +14,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import fi.jessestenroth.koskaelokuvat.fragments.ListFragment;
 
@@ -26,6 +27,8 @@ public class FinnkinoAPIGetterList {
 
     public FinnkinoAPIGetterList(Context context, ArrayList<ShowTime> list, ListView listView, ListFragment fragment) {
         this.context = context;
+        String CurrentLang = Locale.getDefault().getLanguage();
+        suomeksi = CurrentLang.equals("fi");
         this.list = list;
         this.listView = listView;
         Lfragment = fragment;

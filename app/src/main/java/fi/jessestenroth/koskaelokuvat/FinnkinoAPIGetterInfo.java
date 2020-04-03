@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 
 public class FinnkinoAPIGetterInfo {
     private Context context;
@@ -21,6 +22,8 @@ public class FinnkinoAPIGetterInfo {
 
     public FinnkinoAPIGetterInfo(Context context, int event, ImageView imagee2, TextView title2, TextView kesto2, TextView vuosi2, ImageView rating2, TextView genre2, TextView synopsis2, TextView timeView2, TextView location2) {
         this.context = context;
+        String CurrentLang = Locale.getDefault().getLanguage();
+        suomeksi = CurrentLang.equals("fi");
         xml = new readShowAndMovie(event, imagee2, title2, kesto2, vuosi2, rating2, genre2, synopsis2, timeView2, location2);
         xml.execute();
     }
