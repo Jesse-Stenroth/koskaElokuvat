@@ -21,18 +21,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/select_language"
-                android:layout_marginBottom="10dp"/>
+                android:layout_marginRight="10dp"/>
             <Spinner
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:drawSelectorOnTop="true"
                 android:id="@+id/languageSelector"
-                android:entries="@array/languages"/>
+                android:entries="@array/languages"
+                android:layout_marginRight="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select_default_area"
+                android:layout_marginRight="10dp"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/areas_settings"/>
 
         </LinearLayout>
     </LinearLayout>

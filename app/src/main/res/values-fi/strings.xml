@@ -9,4 +9,5 @@
     <string name="buy">Osta lippu</string>
     <string name="select_language">Vaihda sovelluksen kieli</string>
     <string name="settings">Asetukset</string>
+    <string name="select_default_area">Valitse oletus alue</string>
 </resources>

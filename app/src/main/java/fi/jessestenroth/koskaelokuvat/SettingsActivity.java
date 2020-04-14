@@ -15,8 +15,10 @@ import android.widget.Spinner;
 
 import java.util.Locale;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGetterSettings.getDataToSettings {
     private Spinner lang;
+    private Spinner area;
+    private SavingFeature save;
     //because listener call also when spinner create
     private boolean canRun = false;
     private boolean debug = true;
@@ -24,7 +26,12 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        this.save = new SavingFeature(this);
         this.lang = (Spinner) findViewById(R.id.languageSelector);
+        this.area = (Spinner) findViewById(R.id.areas_settings);
+
+        FinnkinoAPIGetterSettings xml = new FinnkinoAPIGetterSettings(area, this, this);
+        xml.getAreas();
         this.lang.setSelection(-1);
         this.lang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -72,5 +79,13 @@ public class SettingsActivity extends AppCompatActivity {
         }
         resources.updateConfiguration(config, dm);
         getApplicationContext().getResources().updateConfiguration(config, dm);
+    }
+
+    @Override
+    public void setArea(String name, String code) {
+        if(debug){
+            Log.e("area", "name: " + name + " code: " + code);
+        }
+        save.saveArea(name, code);
     }
 }
