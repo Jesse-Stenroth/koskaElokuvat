@@ -8,6 +8,9 @@ import fi.jessestenroth.koskaelokuvat.fragments.searchFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements searchFragment.sendData, ListFragment.sendToInfo{
     private searchFragment sf;
@@ -57,5 +60,31 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         } else{
             updateInfoFragment(event, info, time, location, ticket);
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        MenuItem m = menu.findItem(R.id.clickSettings);
+        m.setEnabled(true);
+        return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        super.onOptionsItemSelected(menuItem);
+        switch (menuItem.getItemId()){
+            case (R.id.clickSettings):
+                //go
+                Intent settings = new Intent(this, SettingsActivity.class);
+                startActivity(settings);
+                return true;
+        }
+        return false;
     }
 }

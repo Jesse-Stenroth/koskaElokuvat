@@ -6,4 +6,6 @@
     <string name="year">Year:</string>
     <string name="genres">Genres:</string>
     <string name="buy">Buy ticket</string>
+    <string name="select_language">Change app Language</string>
+    <string name="settings">Settings</string>
 </resources>

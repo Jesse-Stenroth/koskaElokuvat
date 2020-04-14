@@ -7,4 +7,6 @@
     <string name="year">Vuosi:</string>
     <string name="genres">Genret:</string>
     <string name="buy">Osta lippu</string>
+    <string name="select_language">Vaihda sovelluksen kieli</string>
+    <string name="settings">Asetukset</string>
 </resources>

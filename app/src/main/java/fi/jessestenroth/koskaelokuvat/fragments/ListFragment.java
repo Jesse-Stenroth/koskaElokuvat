@@ -29,7 +29,6 @@ public class ListFragment extends Fragment {
     }
     public void clearList(){
         l.clear();
-       // updateList();
         lista.setAdapter(null);
     }
     @Override
