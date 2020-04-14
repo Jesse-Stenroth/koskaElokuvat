@@ -19,6 +19,8 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
     private Spinner lang;
     private Spinner area;
     private SavingFeature save;
+    //because area listener call functions also when spinner is created
+    private boolean canSaveArea = false;
     //because listener call also when spinner create
     private boolean canRun = false;
     private boolean debug = true;
@@ -83,9 +85,13 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
 
     @Override
     public void setArea(String name, String code) {
-        if(debug){
-            Log.e("area", "name: " + name + " code: " + code);
+        if(canSaveArea) {
+            if (debug) {
+                Log.e("area", "name: " + name + " code: " + code);
+            }
+            save.saveArea(name, code);
+        } else{
+            canSaveArea = true;
         }
-        save.saveArea(name, code);
     }
 }
