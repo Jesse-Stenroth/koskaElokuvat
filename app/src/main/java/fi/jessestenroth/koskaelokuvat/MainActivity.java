@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     private searchFragment sf;
     private ListFragment lf;
     private SavingFeature save;
+    private boolean gpsOn = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
 
         save = new SavingFeature(this);
         save.saveBoolean("update", false);
+        gpsOn = save.getBoolean("gps");
 
         FragmentManager fm = getSupportFragmentManager();
         sf = (searchFragment) fm.findFragmentById(R.id.palkki);
