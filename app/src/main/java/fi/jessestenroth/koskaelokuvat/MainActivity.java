@@ -31,6 +31,16 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         lf.clearList();
         lf.updateData(time, areaId);
     }
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        SavingFeature save = new SavingFeature(this);
+        if(save.getBoolean("update")){
+            save.saveBoolean("update", false);
+            finish();
+            startActivity(getIntent());
+        }
+    }
 
     @Override
     public void clearList() {
