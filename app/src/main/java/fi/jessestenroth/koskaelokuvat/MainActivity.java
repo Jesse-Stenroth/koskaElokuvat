@@ -15,11 +15,15 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity implements searchFragment.sendData, ListFragment.sendToInfo{
     private searchFragment sf;
     private ListFragment lf;
+    private SavingFeature save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        save = new SavingFeature(this);
+        save.saveBoolean("update", false);
 
         FragmentManager fm = getSupportFragmentManager();
         sf = (searchFragment) fm.findFragmentById(R.id.palkki);
@@ -34,9 +38,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     @Override
     public void onRestart(){
         super.onRestart();
-        SavingFeature save = new SavingFeature(this);
         if(save.getBoolean("update")){
-            save.saveBoolean("update", false);
             finish();
             startActivity(getIntent());
         }
