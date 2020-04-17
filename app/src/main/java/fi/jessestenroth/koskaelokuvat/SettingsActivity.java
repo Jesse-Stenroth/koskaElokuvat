@@ -81,6 +81,8 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
         }
         resources.updateConfiguration(config, dm);
         getApplicationContext().getResources().updateConfiguration(config, dm);
+        startActivity(getIntent());
+        finish();
     }
 
     @Override
