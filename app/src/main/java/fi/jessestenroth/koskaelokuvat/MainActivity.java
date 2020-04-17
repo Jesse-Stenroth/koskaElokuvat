@@ -1,32 +1,49 @@
 package fi.jessestenroth.koskaelokuvat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import fi.jessestenroth.koskaelokuvat.data.OwnLocation;
 import fi.jessestenroth.koskaelokuvat.fragments.ListFragment;
 import fi.jessestenroth.koskaelokuvat.fragments.infoFragment;
 import fi.jessestenroth.koskaelokuvat.fragments.searchFragment;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements searchFragment.sendData, ListFragment.sendToInfo{
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements searchFragment.sendData, ListFragment.sendToInfo, LocationListener {
     private searchFragment sf;
     private ListFragment lf;
     private SavingFeature save;
     private boolean gpsOn = false;
+    private final int PERMISSION_LOCATION = 2020;
+    private boolean debuggi = true;
+    private ArrayList<OwnLocation> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        list = new ArrayList<>();
+        putDataToList();
         save = new SavingFeature(this);
         save.saveBoolean("update", false);
         gpsOn = save.getBoolean("gps");
-
+        checkLocation();
         FragmentManager fm = getSupportFragmentManager();
         sf = (searchFragment) fm.findFragmentById(R.id.palkki);
         lf = (ListFragment) fm.findFragmentById(R.id.lista);
@@ -100,5 +117,85 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
                 return true;
         }
         return false;
+    }
+
+    private void putDataToList(){
+        list.add(new OwnLocation(24.945831, 60.192059, "Helsinki", "1002"));
+        list.add(new OwnLocation(24.655899, 60.205490, "Espoo", "1012"));
+        list.add(new OwnLocation(23.743065, 61.504967, "Tampere", "1021"));
+    }
+
+    private void checkLocation(){
+        if(save.getBoolean("gps")){
+
+            int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+
+            if(permissionCheck == PackageManager.PERMISSION_DENIED){
+                String[] lis = {Manifest.permission.ACCESS_FINE_LOCATION};
+                ActivityCompat.requestPermissions(this, lis, PERMISSION_LOCATION);
+            } else{
+                LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, this);
+            }
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+        if(requestCode == PERMISSION_LOCATION){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                try{
+                    LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, this);
+                } catch (SecurityException e){
+                    if(debuggi){
+                        e.printStackTrace();
+                    }
+                }
+            } else{
+                Toast.makeText(this, getString(R.string.location_denied), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        //new Location
+        if(debuggi){
+            Log.d("Location", "longi " + location.getLongitude() + " lati " + location.getLatitude());
+        }
+        OwnLocation best = list.get(0);
+        float ShortestDistance = distance(location, best);
+        for(int lap=1; lap < list.size(); lap++){
+            OwnLocation now = list.get(lap);
+            if(distance(location, now) < ShortestDistance){
+                best = now;
+            }
+        }
+        save.saveArea(best.getName(), best.getCode());
+        save.saveBoolean("asetettu", true);
+    }
+
+    private float distance(Location location, OwnLocation best) {
+        double otherLongi = best.getLongitude();
+        double otherLati = best.getLatitude();
+        Location other = new Location("help");
+        other.setLongitude(otherLongi);
+        other.setLatitude(otherLati);
+        return location.distanceTo(other);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }

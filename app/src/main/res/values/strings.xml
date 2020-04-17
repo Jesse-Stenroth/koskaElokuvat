@@ -13,4 +13,5 @@
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="turn_gps_off">You must turn first gps off if you want change location manually</string>
+    <string name="location_denied">Location permission denied</string>
 </resources>
