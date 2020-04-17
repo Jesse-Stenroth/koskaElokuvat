@@ -23,10 +23,12 @@ public class FinnkinoAPIGetterSettings {
     private Context context;
     private area data;
     private getDataToSettings callback;
+    private SavingFeature save;
     public FinnkinoAPIGetterSettings(Spinner location, Context con, getDataToSettings call){
         paikka = location;
         context = con;
         callback = call;
+        save = new SavingFeature(con);
     }
 
     public area getAreas(){
@@ -87,6 +89,20 @@ public class FinnkinoAPIGetterSettings {
             ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, data.getName());
             arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             paikka.setAdapter(arrayAdapter2);
+            //if settings contains default option then get this
+            if(save.getBoolean("asetettu")){
+                String kaytossa = save.getAreaName();
+                int ind = 0;
+                ArrayList<String> ap = data.getName();
+                for(int lap=0; lap < ap.size(); lap++){
+                    String vali = ap.get(lap);
+                    if(vali.equals(kaytossa)){
+                        ind = lap;
+                        break;
+                    }
+                }
+                paikka.setSelection(ind);
+            }
             paikka.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
