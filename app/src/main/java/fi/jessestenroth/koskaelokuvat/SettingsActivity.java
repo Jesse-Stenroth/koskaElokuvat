@@ -42,9 +42,9 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
                     if(debug){
                         Log.e("value", value);
                     }
-                    if(value.equals("Finnish")){
+                    if(value.equals("Finnish") || value.equals("Suomi")){
                         setLang("fi");
-                    } else if(value.equals("System")){
+                    } else if(value.equals("System") || value.equals("Järjestelmä")){
                         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                             if (debug) {
                                 Log.e("locale", Resources.getSystem().getConfiguration().getLocales().get(0).getLanguage());

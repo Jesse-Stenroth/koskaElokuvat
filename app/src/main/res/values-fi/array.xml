@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        <item>Nyt oleva</item>
+        <item>Englanti</item>
+        <item>Suomi</item>
+        <item>Järjestelmä</item>
+    </string-array>
+</resources>
