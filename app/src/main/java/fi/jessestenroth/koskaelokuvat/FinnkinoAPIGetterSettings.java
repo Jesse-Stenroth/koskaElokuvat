@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -24,6 +25,7 @@ public class FinnkinoAPIGetterSettings {
     private area data;
     private getDataToSettings callback;
     private SavingFeature save;
+    private boolean firstRun = true;
     public FinnkinoAPIGetterSettings(Spinner location, Context con, getDataToSettings call){
         paikka = location;
         context = con;
@@ -106,9 +108,9 @@ public class FinnkinoAPIGetterSettings {
             paikka.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                    String code = data.getId().get(position);
-                    codeHelp = code;
-                    callback.setArea(data.getName().get(position), code);
+                            String code = data.getId().get(position);
+                            codeHelp = code;
+                            callback.setArea(data.getName().get(position), code);
                 }
 
                 @Override

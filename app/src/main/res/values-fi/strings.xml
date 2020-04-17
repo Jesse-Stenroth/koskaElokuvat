@@ -13,4 +13,5 @@
     <string name="gps_setting">Gps paikka:</string>
     <string name="on">PÄÄLLÄ</string>
     <string name="off">POIS</string>
+    <string name="turn_gps_off">Sinun pitää sulkea gps pois, jos haluat valita alueen manuaalisesti</string>
 </resources>
