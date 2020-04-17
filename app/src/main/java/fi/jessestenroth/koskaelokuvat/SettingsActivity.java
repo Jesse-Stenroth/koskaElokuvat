@@ -11,7 +11,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 
 import java.util.Locale;
 
@@ -19,6 +21,7 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
     private Spinner lang;
     private Spinner area;
     private SavingFeature save;
+    private Switch select;
     //because area listener call functions also when spinner is created
     private boolean canSaveArea = false;
     //because listener call also when spinner create
@@ -31,6 +34,7 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
         this.save = new SavingFeature(this);
         this.lang = (Spinner) findViewById(R.id.languageSelector);
         this.area = (Spinner) findViewById(R.id.areas_settings);
+        this.select = (Switch) findViewById(R.id.switch1);
 
         FinnkinoAPIGetterSettings xml = new FinnkinoAPIGetterSettings(area, this, this);
         xml.getAreas();
@@ -67,6 +71,20 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
 
             public void onNothingSelected(AdapterView<?> adapterView) {
                 return;
+            }
+        });
+
+        //switch element
+        this.select.setChecked(save.getBoolean("gps"));
+        this.select.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    save.saveBoolean("gps", true);
+                } else {
+                    // The toggle is disabled
+                    save.saveBoolean("gps", false);
+                }
             }
         });
     }

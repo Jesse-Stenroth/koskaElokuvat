@@ -43,6 +43,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/areas_settings"/>
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switch1"
+                android:text="@string/gps_setting"
+                android:textOff="@string/off"
+                android:textOn="@string/on"/>
 
         </LinearLayout>
     </LinearLayout>

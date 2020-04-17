@@ -10,4 +10,7 @@
     <string name="select_language">Vaihda sovelluksen kieli</string>
     <string name="settings">Asetukset</string>
     <string name="select_default_area">Valitse oletus alue</string>
+    <string name="gps_setting">Gps paikka:</string>
+    <string name="on">PÄÄLLÄ</string>
+    <string name="off">POIS</string>
 </resources>
