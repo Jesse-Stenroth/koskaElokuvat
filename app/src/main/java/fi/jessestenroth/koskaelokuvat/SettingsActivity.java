@@ -92,6 +92,7 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
                 Log.e("area", "name: " + name + " code: " + code);
             }
             save.saveArea(name, code);
+            save.saveBoolean("asetettu", true);
         } else{
             canSaveArea = true;
         }

@@ -3,7 +3,6 @@ package fi.jessestenroth.koskaelokuvat;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -27,11 +26,13 @@ public class FinnkinoAPIGetterNavigation {
     private area data;
     private ArrayList<String> times = new ArrayList<>();
     private searchFragment.sendData callback;
+    private SavingFeature save;
     public FinnkinoAPIGetterNavigation(Spinner time, Spinner location, Context con, searchFragment.sendData call){
         aika = time;
         paikka = location;
         context = con;
         callback = call;
+        save = new SavingFeature(con);
     }
 
     public area getAreas(){
@@ -98,6 +99,20 @@ public class FinnkinoAPIGetterNavigation {
             ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, data.getName());
             arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             paikka.setAdapter(arrayAdapter2);
+            //if settings contains default option then get this
+            if(save.getBoolean("asetettu")){
+                String kaytossa = save.getAreaName();
+                int ind = 0;
+                ArrayList<String> ap = data.getName();
+                for(int lap=0; lap < ap.size(); lap++){
+                    String vali = ap.get(lap);
+                    if(vali.equals(kaytossa)){
+                        ind = lap;
+                        break;
+                    }
+                }
+                paikka.setSelection(ind);
+            }
             paikka.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
