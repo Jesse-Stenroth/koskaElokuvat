@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         setContentView(R.layout.activity_main);
         list = new ArrayList<>();
         putDataToList();
-        locationCanUpdate = true;
-        save = new SavingFeature(this);
-        save.saveBoolean("update", false);
-        gpsOn = save.getBoolean("gps");
-        checkLocation();
         FragmentManager fm = getSupportFragmentManager();
         sf = (searchFragment) fm.findFragmentById(R.id.palkki);
         lf = (ListFragment) fm.findFragmentById(R.id.lista);
+        locationCanUpdate = true;
+        save = new SavingFeature(this);
+        gpsOn = save.getBoolean("gps");
+        checkLocation();
+        save.saveBoolean("update", false);
     }
 
     @Override
@@ -168,17 +168,19 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
             if (debuggi) {
                 Log.d("Location", "longi " + location.getLongitude() + " lati " + location.getLatitude());
             }
-            OwnLocation best = list.get(0);
-            float ShortestDistance = distance(location, best);
-            for (int lap = 1; lap < list.size(); lap++) {
-                OwnLocation now = list.get(lap);
-                if (distance(location, now) < ShortestDistance) {
-                    best = now;
+            if(save.getBoolean("gps")) {
+                OwnLocation best = list.get(0);
+                float ShortestDistance = distance(location, best);
+                for (int lap = 1; lap < list.size(); lap++) {
+                    OwnLocation now = list.get(lap);
+                    if (distance(location, now) < ShortestDistance) {
+                        best = now;
+                    }
                 }
+                save.saveArea(best.getName(), best.getCode());
+                save.saveBoolean("asetettu", true);
+                updateFragment();
             }
-            save.saveArea(best.getName(), best.getCode());
-            save.saveBoolean("asetettu", true);
-            updateFragment();
     }
 
     private float distance(Location location, OwnLocation best) {
