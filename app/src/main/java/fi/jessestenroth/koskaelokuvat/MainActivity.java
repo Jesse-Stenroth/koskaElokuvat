@@ -177,9 +177,11 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
                         best = now;
                     }
                 }
-                save.saveArea(best.getName(), best.getCode());
-                save.saveBoolean("asetettu", true);
-                updateFragment();
+                if(locationCanUpdate) {
+                    save.saveArea(best.getName(), best.getCode());
+                    save.saveBoolean("asetettu", true);
+                    updateFragment();
+                }
             }
     }
 
@@ -199,13 +201,11 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
 
     private void updateFragment(){
         try {
-            if (locationCanUpdate) {
                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.detach(sf);
                 ft.attach(sf);
                 ft.commit();
                 locationCanUpdate = false;
-            }
         } catch (Exception e){
             if(debuggi){
                 e.printStackTrace();
