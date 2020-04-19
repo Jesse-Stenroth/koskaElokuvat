@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import fi.jessestenroth.koskaelokuvat.data.OwnLocation;
 import fi.jessestenroth.koskaelokuvat.fragments.ListFragment;
 import fi.jessestenroth.koskaelokuvat.fragments.infoFragment;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     private final int PERMISSION_LOCATION = 2020;
     private boolean debuggi = true;
     private ArrayList<OwnLocation> list;
+    private boolean locationCanUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         setContentView(R.layout.activity_main);
         list = new ArrayList<>();
         putDataToList();
+        locationCanUpdate = true;
         save = new SavingFeature(this);
         save.saveBoolean("update", false);
         gpsOn = save.getBoolean("gps");
@@ -159,20 +162,23 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
 
     @Override
     public void onLocationChanged(Location location) {
-        //new Location
-        if(debuggi){
-            Log.d("Location", "longi " + location.getLongitude() + " lati " + location.getLatitude());
-        }
-        OwnLocation best = list.get(0);
-        float ShortestDistance = distance(location, best);
-        for(int lap=1; lap < list.size(); lap++){
-            OwnLocation now = list.get(lap);
-            if(distance(location, now) < ShortestDistance){
-                best = now;
+        if(locationCanUpdate) {
+            //new Location
+            if (debuggi) {
+                Log.d("Location", "longi " + location.getLongitude() + " lati " + location.getLatitude());
             }
+            OwnLocation best = list.get(0);
+            float ShortestDistance = distance(location, best);
+            for (int lap = 1; lap < list.size(); lap++) {
+                OwnLocation now = list.get(lap);
+                if (distance(location, now) < ShortestDistance) {
+                    best = now;
+                }
+            }
+            save.saveArea(best.getName(), best.getCode());
+            save.saveBoolean("asetettu", true);
+            updateFragment();
         }
-        save.saveArea(best.getName(), best.getCode());
-        save.saveBoolean("asetettu", true);
     }
 
     private float distance(Location location, OwnLocation best) {
@@ -187,6 +193,14 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
 
+    }
+
+    private void updateFragment(){
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(sf);
+        ft.attach(sf);
+        ft.commit();
+        locationCanUpdate = false;
     }
 
     @Override

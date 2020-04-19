@@ -107,9 +107,11 @@ public class FinnkinoAPIGetterSettings {
             paikka.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                            String code = data.getId().get(position);
-                            codeHelp = code;
-                            callback.setArea(data.getName().get(position), code);
+                    if(!save.getBoolean("gps")) {
+                        String code = data.getId().get(position);
+                        codeHelp = code;
+                        callback.setArea(data.getName().get(position), code);
+                    }
                 }
 
                 @Override
