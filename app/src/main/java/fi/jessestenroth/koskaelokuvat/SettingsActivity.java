@@ -26,7 +26,7 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
     private boolean canSaveArea = false;
     //because listener call also when spinner create
     private boolean canRun = false;
-    private boolean debug = true;
+    private boolean debug = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

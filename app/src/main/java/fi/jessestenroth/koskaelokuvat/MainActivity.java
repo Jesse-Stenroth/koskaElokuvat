@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     private SavingFeature save;
     private boolean gpsOn = false;
     private final int PERMISSION_LOCATION = 2020;
-    private boolean debuggi = true;
+    private boolean debuggi = false;
     private ArrayList<OwnLocation> list;
     private boolean locationCanUpdate;
 
