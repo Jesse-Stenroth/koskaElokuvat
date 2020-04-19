@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         super.onCreate(savedInstanceState);
         if(getResources().getBoolean(R.bool.portrait_only)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        } else{
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         }
         setContentView(R.layout.activity_main);
         list = new ArrayList<>();
