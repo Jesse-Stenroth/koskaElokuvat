@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
             if (debuggi) {
                 Log.d("Location", "longi " + location.getLongitude() + " lati " + location.getLatitude());
             }
-            if(save.getBoolean("gps")) {
+            if(gpsOn) {
                 OwnLocation best = list.get(0);
                 float ShortestDistance = distance(location, best);
                 for (int lap = 1; lap < list.size(); lap++) {
