@@ -6,18 +6,22 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import fi.jessestenroth.koskaelokuvat.data.OwnLocation;
+import fi.jessestenroth.koskaelokuvat.data.functions.SavingFeature;
 import fi.jessestenroth.koskaelokuvat.fragments.ListFragment;
 import fi.jessestenroth.koskaelokuvat.fragments.infoFragment;
 import fi.jessestenroth.koskaelokuvat.fragments.searchFragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,9 +40,13 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     private ArrayList<OwnLocation> list;
     private boolean locationCanUpdate;
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getResources().getBoolean(R.bool.portrait_only)){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
         setContentView(R.layout.activity_main);
         list = new ArrayList<>();
         putDataToList();

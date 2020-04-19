@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import fi.jessestenroth.koskaelokuvat.data.ShowTime;
 
 public class ShowTimeAdapter extends ArrayAdapter<ShowTime> {
 

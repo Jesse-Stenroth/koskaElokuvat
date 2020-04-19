@@ -1,4 +1,4 @@
-package fi.jessestenroth.koskaelokuvat;
+package fi.jessestenroth.koskaelokuvat.data;
 
 public class Movie {
     private int ID;

@@ -1,4 +1,4 @@
-package fi.jessestenroth.koskaelokuvat;
+package fi.jessestenroth.koskaelokuvat.data;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package fi.jessestenroth.koskaelokuvat;
+package fi.jessestenroth.koskaelokuvat.data.functions;
 
 import android.content.Context;
 import android.content.SharedPreferences;

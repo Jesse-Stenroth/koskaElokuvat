@@ -1,4 +1,4 @@
-package fi.jessestenroth.koskaelokuvat;
+package fi.jessestenroth.koskaelokuvat.data.functions;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

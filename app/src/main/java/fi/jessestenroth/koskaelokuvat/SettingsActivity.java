@@ -1,8 +1,9 @@
 package fi.jessestenroth.koskaelokuvat;
 
 import androidx.appcompat.app.AppCompatActivity;
+import fi.jessestenroth.koskaelokuvat.data.functions.SavingFeature;
+import fi.jessestenroth.koskaelokuvat.data.finnkinoapi.FinnkinoAPIGetterSettings;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;

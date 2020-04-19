@@ -7,9 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 import androidx.fragment.app.Fragment;
-import fi.jessestenroth.koskaelokuvat.FinnkinoAPIGetterNavigation;
+import fi.jessestenroth.koskaelokuvat.data.finnkinoapi.FinnkinoAPIGetterNavigation;
 import fi.jessestenroth.koskaelokuvat.R;
-import fi.jessestenroth.koskaelokuvat.area;
+import fi.jessestenroth.koskaelokuvat.data.area;
 
 public class searchFragment extends Fragment {
     private Spinner aikaa;

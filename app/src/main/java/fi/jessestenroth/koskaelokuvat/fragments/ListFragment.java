@@ -10,9 +10,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import androidx.fragment.app.Fragment;
-import fi.jessestenroth.koskaelokuvat.FinnkinoAPIGetterList;
+import fi.jessestenroth.koskaelokuvat.data.finnkinoapi.FinnkinoAPIGetterList;
 import fi.jessestenroth.koskaelokuvat.R;
-import fi.jessestenroth.koskaelokuvat.ShowTime;
+import fi.jessestenroth.koskaelokuvat.data.ShowTime;
 import fi.jessestenroth.koskaelokuvat.ShowTimeAdapter;
 
 public class ListFragment extends Fragment {

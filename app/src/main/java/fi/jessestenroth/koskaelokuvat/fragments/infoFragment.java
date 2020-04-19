@@ -10,14 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.fragment.app.Fragment;
-import fi.jessestenroth.koskaelokuvat.FinnkinoAPIGetterInfo;
-import fi.jessestenroth.koskaelokuvat.Movie;
+import fi.jessestenroth.koskaelokuvat.data.finnkinoapi.FinnkinoAPIGetterInfo;
 import fi.jessestenroth.koskaelokuvat.R;
-import fi.jessestenroth.koskaelokuvat.ShowTime;
 
 public class infoFragment extends Fragment {
     private View view;
@@ -53,10 +48,9 @@ public class infoFragment extends Fragment {
     }
 
     public void updateInfo(int event){
-
+        view.setVisibility(View.VISIBLE);
         //update elements
         FinnkinoAPIGetterInfo getterInfo = new FinnkinoAPIGetterInfo(getActivity(), event, imagee, title, kesto, vuosi, rating, genre, synopsis, time, location);
-        view.setVisibility(View.VISIBLE);
     }
     public void changeTime(String text){
         this.time.setText(text);

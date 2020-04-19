@@ -1,4 +1,4 @@
-package fi.jessestenroth.koskaelokuvat;
+package fi.jessestenroth.koskaelokuvat.data.finnkinoapi;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import fi.jessestenroth.koskaelokuvat.data.ShowTime;
 import fi.jessestenroth.koskaelokuvat.fragments.ListFragment;
 
 public class FinnkinoAPIGetterList {
