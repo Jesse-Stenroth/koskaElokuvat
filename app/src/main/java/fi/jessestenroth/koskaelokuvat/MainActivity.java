@@ -30,20 +30,32 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * This is base activity what hold fragments of view
+ * @author Jesse Stenroth
+ */
 public class MainActivity extends AppCompatActivity implements searchFragment.sendData, ListFragment.sendToInfo, LocationListener {
+    //save data of fragments
     private searchFragment sf;
     private ListFragment lf;
+    //android save functions
     private SavingFeature save;
+    //information is gps on
     private boolean gpsOn = false;
+    //permission for location
     private final int PERMISSION_LOCATION = 2020;
-    private boolean debuggi = true;
+    //debug
+    private boolean debuggi = false;
+    //list of possible auto location place
     private ArrayList<OwnLocation> list;
+    //can location update or not
     private boolean locationCanUpdate;
 
     @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //if tablet then landscape mode else portrait
         if(getResources().getBoolean(R.bool.portrait_only)){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         } else{
@@ -51,14 +63,19 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         }
         setContentView(R.layout.activity_main);
         list = new ArrayList<>();
+        //put data to list
         putDataToList();
+        //get fragments
         FragmentManager fm = getSupportFragmentManager();
         sf = (searchFragment) fm.findFragmentById(R.id.palkki);
         lf = (ListFragment) fm.findFragmentById(R.id.lista);
         locationCanUpdate = true;
         save = new SavingFeature(this);
+        //get information is gps on
         gpsOn = save.getBoolean("gps");
+        //check user location
         checkLocation();
+        //not need update view again
         save.saveBoolean("update", false);
     }
 
@@ -70,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     @Override
     public void onRestart(){
         super.onRestart();
+        //if must update then reload activity
         if(save.getBoolean("update")){
             finish();
             startActivity(getIntent());
@@ -81,12 +99,28 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         lf.clearList();
     }
 
+    /**
+     * This method update data of infoFragment
+     * @param event showtime event id
+     * @param info infoFragment
+     * @param time show time
+     * @param location show location
+     * @param ticket ticket url
+     */
     private void updateInfoFragment(int event, infoFragment info, String time, String location, String ticket) {
         info.updateInfo(event);
         info.changeTime(time);
         info.changeLocation(location);
         info.changeTicket(ticket);
     }
+
+    /**
+     * if portrait must open new activity and send data and this method do it
+     * @param event showtime event id
+     * @param time show time
+     * @param location show location
+     * @param ticket show ticket url
+     */
     private void startNewActivity(int event, String time, String location, String ticket) {
         Intent showInfo = new Intent(this, Main2Activity.class);
         showInfo.putExtra("event", event);
@@ -132,12 +166,18 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
         return false;
     }
 
+    /**
+     * This method add locations to list
+     */
     private void putDataToList(){
         list.add(new OwnLocation(24.945831, 60.192059, "Helsinki", "1002"));
         list.add(new OwnLocation(24.655899, 60.205490, "Espoo", "1012"));
         list.add(new OwnLocation(23.743065, 61.504967, "Tampere", "1021"));
     }
 
+    /**
+     * This method call when want update location information
+     */
     private void checkLocation(){
         if(save.getBoolean("gps")){
 
@@ -179,6 +219,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
                 Log.d("Location", "longi " + location.getLongitude() + " lati " + location.getLatitude());
             }
             if(gpsOn) {
+                //search shortest location
                 OwnLocation best = list.get(0);
                 float ShortestDistance = distance(location, best);
                 for (int lap = 1; lap < list.size(); lap++) {
@@ -195,6 +236,12 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
             }
     }
 
+    /**
+     * This method calculate distance between two location
+     * @param location user location
+     * @param best location of item from list
+     * @return distance between two location
+     */
     private float distance(Location location, OwnLocation best) {
         double otherLongi = best.getLongitude();
         double otherLati = best.getLatitude();
@@ -209,6 +256,9 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
 
     }
 
+    /**
+     * This methos update search fragment
+     */
     private void updateFragment(){
         try {
                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
