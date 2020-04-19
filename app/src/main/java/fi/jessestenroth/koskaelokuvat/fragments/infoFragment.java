@@ -48,13 +48,15 @@ public class infoFragment extends Fragment {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ticket));
             startActivity(browserIntent);
         });
+        view.setVisibility(View.GONE);
         return view;
     }
+
     public void updateInfo(int event){
 
         //update elements
         FinnkinoAPIGetterInfo getterInfo = new FinnkinoAPIGetterInfo(getActivity(), event, imagee, title, kesto, vuosi, rating, genre, synopsis, time, location);
-
+        view.setVisibility(View.VISIBLE);
     }
     public void changeTime(String text){
         this.time.setText(text);
