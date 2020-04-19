@@ -7,6 +7,7 @@ public class SavingFeature {
 
     private static final String pref = "saving";
     private Context context;
+    private boolean debuggi = true;
 
     public SavingFeature(Context context){
         this.context = context;
@@ -33,8 +34,13 @@ public class SavingFeature {
         return settings.getString(key, "null");
     }
     public void saveArea(String name, String code){
+        if(debuggi){
+            System.out.println("namr: " + name + " code: " + code);
+        }
         saveString("areaName", name);
         saveString("areaCode", code);
+        saveBoolean("update", true);
+        saveBoolean("asetettu", true);
     }
     public String getAreaName(){
         return getStringValue("areaName");

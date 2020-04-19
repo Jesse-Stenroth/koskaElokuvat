@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     private SavingFeature save;
     private boolean gpsOn = false;
     private final int PERMISSION_LOCATION = 2020;
-    private boolean debuggi = false;
+    private boolean debuggi = true;
     private ArrayList<OwnLocation> list;
     private boolean locationCanUpdate;
 
@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
             } else{
                 LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, this);
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
             }
         }
     }
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
                 try{
                     LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,0, this);
+                    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
                 } catch (SecurityException e){
                     if(debuggi){
                         e.printStackTrace();
@@ -162,7 +164,6 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
 
     @Override
     public void onLocationChanged(Location location) {
-        if(locationCanUpdate) {
             //new Location
             if (debuggi) {
                 Log.d("Location", "longi " + location.getLongitude() + " lati " + location.getLatitude());
@@ -178,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
             save.saveArea(best.getName(), best.getCode());
             save.saveBoolean("asetettu", true);
             updateFragment();
-        }
     }
 
     private float distance(Location location, OwnLocation best) {
@@ -196,11 +196,19 @@ public class MainActivity extends AppCompatActivity implements searchFragment.se
     }
 
     private void updateFragment(){
-        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.detach(sf);
-        ft.attach(sf);
-        ft.commit();
-        locationCanUpdate = false;
+        try {
+            if (locationCanUpdate) {
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.detach(sf);
+                ft.attach(sf);
+                ft.commit();
+                locationCanUpdate = false;
+            }
+        } catch (Exception e){
+            if(debuggi){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

@@ -88,6 +88,11 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        save.saveBoolean("update", true);
+    }
     private void setLang(String l){
         Resources resources = getResources();
         DisplayMetrics dm = resources.getDisplayMetrics();
@@ -110,8 +115,6 @@ public class SettingsActivity extends AppCompatActivity implements FinnkinoAPIGe
                 Log.e("area", "name: " + name + " code: " + code);
             }
             save.saveArea(name, code);
-            save.saveBoolean("asetettu", true);
-            save.saveBoolean("update", true);
         } else{
             canSaveArea = true;
         }
