@@ -19,6 +19,10 @@ import java.util.Locale;
 import fi.jessestenroth.koskaelokuvat.data.ShowTime;
 import fi.jessestenroth.koskaelokuvat.fragments.ListFragment;
 
+/**
+ * This class get data to listview
+ * @author Jesse Stenroth
+ */
 public class FinnkinoAPIGetterList {
     private Context context;
     private ArrayList<ShowTime> list;
@@ -26,6 +30,13 @@ public class FinnkinoAPIGetterList {
     private boolean suomeksi = true;
     private ListFragment Lfragment;
 
+    /**
+     * This constructor set basic information memory and use them to update view
+     * @param context context of activity
+     * @param list list what contains showtimes
+     * @param listView view what contains showtimes
+     * @param fragment list fragment
+     */
     public FinnkinoAPIGetterList(Context context, ArrayList<ShowTime> list, ListView listView, ListFragment fragment) {
         this.context = context;
         String CurrentLang = Locale.getDefault().getLanguage();
@@ -35,17 +46,33 @@ public class FinnkinoAPIGetterList {
         Lfragment = fragment;
     }
 
+    /**
+     * This method return list of showtimes
+     * @param day showtime time
+     * @param area showtime area
+     * @return list of showtimes
+     */
     public ArrayList<ShowTime> getData(String day, String area) {
         readShowFeed xml = new readShowFeed(day, area);
         xml.execute();
         return xml.getList();
     }
 
+    /**
+     * This class read data from internet using AsyncTask
+     * @author Jesse Stenroth
+     */
     private class readShowFeed extends AsyncTask{
         URL url;
         ArrayList<ShowTime> out = new ArrayList<>();
         private String area;
         private String day;
+
+        /**
+         * This constructor set area and time information own memory
+         * @param d time
+         * @param a area
+         */
         public readShowFeed(String d, String a){
             area = a;
             day = d;
@@ -133,9 +160,15 @@ public class FinnkinoAPIGetterList {
             return null;
         }
         protected void onPostExecute(Object obj){
+            //after data getting update view
             Lfragment.changeArrayList(out);
             Lfragment.updateList();
         }
+        /**
+         * open stream and connection
+         * @param url url where connect
+         * @return inputStream
+         */
         public InputStream getInputStream(URL url) {
             try {
                 return url.openConnection().getInputStream();
@@ -143,6 +176,11 @@ public class FinnkinoAPIGetterList {
                 return null;
             }
         }
+
+        /**
+         * return list of showtimes
+         * @return showtime list
+         */
         public ArrayList<ShowTime> getList(){
             return list;
         }
