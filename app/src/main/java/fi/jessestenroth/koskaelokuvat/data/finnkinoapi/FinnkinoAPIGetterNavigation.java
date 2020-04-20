@@ -20,6 +20,11 @@ import fi.jessestenroth.koskaelokuvat.data.functions.SavingFeature;
 import fi.jessestenroth.koskaelokuvat.data.area;
 import fi.jessestenroth.koskaelokuvat.fragments.searchFragment;
 
+
+/**
+ * This class get data to searchFragment
+ * @author Jesse Stenroth
+ */
 public class FinnkinoAPIGetterNavigation {
     private Spinner aika;
     private Spinner paikka;
@@ -29,6 +34,14 @@ public class FinnkinoAPIGetterNavigation {
     private ArrayList<String> times = new ArrayList<>();
     private searchFragment.sendData callback;
     private SavingFeature save;
+
+    /**
+     * This constructor set needed data to class memory
+     * @param time element what contains showtimes times of area
+     * @param location element what contains showtime locations
+     * @param con context of activity
+     * @param call callback what use to send data
+     */
     public FinnkinoAPIGetterNavigation(Spinner time, Spinner location, Context con, searchFragment.sendData call){
         aika = time;
         paikka = location;
@@ -37,6 +50,10 @@ public class FinnkinoAPIGetterNavigation {
         save = new SavingFeature(con);
     }
 
+    /**
+     * This method return area informations
+     * @return areas
+     */
     public area getAreas(){
         readAreaFeed xml = new readAreaFeed();
         xml.execute();
@@ -47,11 +64,21 @@ public class FinnkinoAPIGetterNavigation {
         return out;
     }
 
+    /**
+     * This method update list of times
+     * @param code id code of area
+     * @return showtime times
+     */
     public ArrayList<String> getTimesInList(String code){
         readScheduleFeed xml = new readScheduleFeed(code);
         xml.execute();
         return xml.getTimes();
     }
+
+    /**
+     * This class read data from finnkino API of areas
+     * @author Jesse Stenroth
+     */
     private class readAreaFeed extends AsyncTask {
         URL url;
         ArrayList<String> ids = new ArrayList();
@@ -98,6 +125,7 @@ public class FinnkinoAPIGetterNavigation {
             return ids;
         }
         protected void onPostExecute(Object obj){
+            //after getting data update elements
             ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, data.getName());
             arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             paikka.setAdapter(arrayAdapter2);
@@ -121,6 +149,7 @@ public class FinnkinoAPIGetterNavigation {
                     String code = data.getId().get(position);
                     codeHelp = code;
                     System.out.println("Code: " + code);
+                    //update times
                     times = getTimesInList(codeHelp);
                     callback.clearList();
 
@@ -135,7 +164,11 @@ public class FinnkinoAPIGetterNavigation {
 
         }
 
-
+        /**
+         * open stream and connection
+         * @param url url where connect
+         * @return inputStream
+         */
         public InputStream getInputStream(URL url) {
             try {
                 return url.openConnection().getInputStream();
@@ -144,20 +177,38 @@ public class FinnkinoAPIGetterNavigation {
             }
         }
 
+        /**
+         * This method return area ids
+         * @return id list
+         */
         public ArrayList<String> getIds()
         {
             return ids;
         }
+
+        /**
+         * This method return area names
+         * @return name list
+         */
         public ArrayList<String> getNames()
         {
             return names;
         }
     }
 
+    /**
+     * This class getting data of times from finnkino API
+     * @author Jesse Stenroth
+     */
     private class readScheduleFeed extends AsyncTask {
         URL url;
         ArrayList<String> times = new ArrayList();
         private String code;
+
+        /**
+         * This constructor save basic data class memory
+         * @param c code of area
+         */
         public readScheduleFeed(String c){
             code = c;
         }
@@ -201,6 +252,7 @@ public class FinnkinoAPIGetterNavigation {
             return times;
         }
         protected void onPostExecute(Object obj){
+            //after times download update elements
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, times);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             aika.setAdapter(arrayAdapter);
@@ -217,7 +269,11 @@ public class FinnkinoAPIGetterNavigation {
             });
         }
 
-
+        /**
+         * open stream and connection
+         * @param url url where connect
+         * @return inputStream
+         */
         public InputStream getInputStream(URL url) {
             try {
                 return url.openConnection().getInputStream();
@@ -226,6 +282,10 @@ public class FinnkinoAPIGetterNavigation {
             }
         }
 
+        /**
+         * This method return times
+         * @return times of showtimes
+         */
         public ArrayList<String> getTimes() {
             return times;
         }
