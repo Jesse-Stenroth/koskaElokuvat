@@ -6,6 +6,10 @@ import fi.jessestenroth.koskaelokuvat.fragments.infoFragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+/**
+ * This class is for smartphones and this hold details of showtime
+ * @author Jesse Stenroth
+ */
 public class Main2Activity extends AppCompatActivity {
 
     @Override
