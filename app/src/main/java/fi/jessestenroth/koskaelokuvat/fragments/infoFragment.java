@@ -14,8 +14,14 @@ import androidx.fragment.app.Fragment;
 import fi.jessestenroth.koskaelokuvat.data.finnkinoapi.FinnkinoAPIGetterInfo;
 import fi.jessestenroth.koskaelokuvat.R;
 
+/**
+ * This is fragment what hold view of showtime details
+ * @author Jesse Stenroth
+ */
 public class infoFragment extends Fragment {
+    //view of details
     private View view;
+    //elements of view what must change when get data
     private TextView time;
     private TextView location;
     private TextView synopsis;
@@ -26,6 +32,7 @@ public class infoFragment extends Fragment {
     private TextView title;
     private ImageView imagee;
     private Button osta;
+    //ticket buying url
     private String ticket = "";
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceBundle){
         view = inflater.inflate(R.layout.info_fragment, container,false);
@@ -43,21 +50,42 @@ public class infoFragment extends Fragment {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(ticket));
             startActivity(browserIntent);
         });
+        //because tablet mode info showing elements without data so set view not visible
         view.setVisibility(View.GONE);
         return view;
     }
 
+    /**
+     * This method update elements and get data
+     * @param event showtime event id
+     */
     public void updateInfo(int event){
+        //set view visible
         view.setVisibility(View.VISIBLE);
-        //update elements
+        //update elements (get data)
         FinnkinoAPIGetterInfo getterInfo = new FinnkinoAPIGetterInfo(getActivity(), event, imagee, title, kesto, vuosi, rating, genre, synopsis, time, location);
     }
+
+    /**
+     * This method set showtime time
+     * @param text time
+     */
     public void changeTime(String text){
         this.time.setText(text);
     }
+
+    /**
+     * This method set showtime location
+     * @param text location
+     */
     public void changeLocation(String text){
         this.location.setText(text);
     }
+
+    /**
+     * This method set ticket buying url
+     * @param Ticket url of ticket
+     */
     public void changeTicket(String Ticket){
         this.ticket = Ticket;
     }
