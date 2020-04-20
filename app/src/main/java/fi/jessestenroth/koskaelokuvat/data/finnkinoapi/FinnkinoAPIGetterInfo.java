@@ -2,7 +2,6 @@ package fi.jessestenroth.koskaelokuvat.data.finnkinoapi;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,11 +19,29 @@ import fi.jessestenroth.koskaelokuvat.data.functions.ImageLoadTask;
 import fi.jessestenroth.koskaelokuvat.data.Movie;
 import fi.jessestenroth.koskaelokuvat.data.ShowTime;
 
+/**
+ * This class get data of movie details
+ * @author Jesse Stenroth
+ */
 public class FinnkinoAPIGetterInfo {
     private Context context;
     private readShowAndMovie xml;
     private boolean suomeksi = true;
 
+    /**
+     * This constructor get data and elements what update
+     * @param context context of activity
+     * @param event event id code
+     * @param imagee2 imageview of portrait movie image
+     * @param title2 title of movie
+     * @param kesto2 movie length
+     * @param vuosi2 movie year
+     * @param rating2 imageview of rating image
+     * @param genre2 movie genres
+     * @param synopsis2 movie synopsis
+     * @param timeView2 movie showtime time
+     * @param location2 movie showtime location
+     */
     public FinnkinoAPIGetterInfo(Context context, int event, ImageView imagee2, TextView title2, TextView kesto2, TextView vuosi2, ImageView rating2, TextView genre2, TextView synopsis2, TextView timeView2, TextView location2) {
         this.context = context;
         String CurrentLang = Locale.getDefault().getLanguage();
@@ -33,13 +50,26 @@ public class FinnkinoAPIGetterInfo {
         xml.execute();
     }
 
+    /**
+     * This method return showtime
+     * @return showtime
+     */
     public ShowTime getShow(){
         return xml.getShowTime();
     }
+
+    /**
+     * This method return movie
+     * @return movie
+     */
     public Movie getMovie(){
         return xml.getMovieInfo();
     }
 
+    /**
+     * This class get data using AsyncTask function
+     * @author Jesse Stenroth
+     */
     private class readShowAndMovie extends AsyncTask {
         URL url;
         URL url2;
@@ -56,6 +86,19 @@ public class FinnkinoAPIGetterInfo {
         private TextView timeView;
         private TextView location;
 
+        /**
+         * This constructor get data what search and where data put
+         * @param event showtime event id
+         * @param imagee imageview of portrait movie image
+         * @param title title of movie
+         * @param kesto length of movie
+         * @param vuosi release year of movie
+         * @param rating rating image
+         * @param genre genres of movie
+         * @param synopsis synopsis of movie
+         * @param timeView showtime time
+         * @param location showtime location
+         */
         public readShowAndMovie(int event, ImageView imagee, TextView title, TextView kesto, TextView vuosi, ImageView rating, TextView genre, TextView synopsis, TextView timeView, TextView location) {
             this.ev = event;
             this.imagee = imagee;
@@ -149,6 +192,7 @@ public class FinnkinoAPIGetterInfo {
             return null;
         }
         protected void onPostExecute(Object obj){
+            //after get data put data to view elements
             Movie movie = this.mov;
             ShowTime show = this.time;
             title.setText(movie.getTitle());
@@ -157,12 +201,19 @@ public class FinnkinoAPIGetterInfo {
             genre.setText(movie.getGenres());
             synopsis.setText(movie.getSynopsis());
             try {
+                //load images from internet and put them to view
                 new ImageLoadTask(movie.getMediumImagePortrait(), imagee).execute();
                 new ImageLoadTask(movie.getRatingImageURL(), rating).execute();
             } catch (Exception e){
                 e.printStackTrace();
             }
         }
+
+        /**
+         * open stream and connection
+         * @param url url where connect
+         * @return inputStream
+         */
         public InputStream getInputStream(URL url) {
             try {
                 return url.openConnection().getInputStream();
@@ -170,9 +221,19 @@ public class FinnkinoAPIGetterInfo {
                 return null;
             }
         }
+
+        /**
+         * get showtime
+         * @return showtime with information
+         */
         public ShowTime getShowTime(){
             return this.time;
         }
+
+        /**
+         * get movie
+         * @return movie with information
+         */
         public Movie getMovieInfo(){
             return this.mov;
         }
