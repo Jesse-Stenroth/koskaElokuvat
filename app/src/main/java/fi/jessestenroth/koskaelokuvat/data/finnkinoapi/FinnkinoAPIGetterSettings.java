@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import fi.jessestenroth.koskaelokuvat.data.functions.SavingFeature;
 import fi.jessestenroth.koskaelokuvat.data.area;
 
+/**
+ * This class getting data to Settings activity
+ * @author Jesse Stenroth
+ */
 public class FinnkinoAPIGetterSettings {
     private Spinner paikka;
     private String codeHelp = "1029";
@@ -28,6 +32,13 @@ public class FinnkinoAPIGetterSettings {
     private getDataToSettings callback;
     private SavingFeature save;
     private boolean firstRun = true;
+
+    /**
+     * This constructor save basic data to class memory
+     * @param location spinner what hold theatre areas
+     * @param con context of activity
+     * @param call callback to move data
+     */
     public FinnkinoAPIGetterSettings(Spinner location, Context con, getDataToSettings call){
         paikka = location;
         context = con;
@@ -35,6 +46,10 @@ public class FinnkinoAPIGetterSettings {
         save = new SavingFeature(con);
     }
 
+    /**
+     * This method return area list
+     * @return list of areas
+     */
     public area getAreas(){
         readAreaFeed xml = new readAreaFeed();
         xml.execute();
@@ -44,6 +59,11 @@ public class FinnkinoAPIGetterSettings {
         data = out;
         return out;
     }
+
+    /**
+     * This class read data from finnkino API (areas of theatres)
+     * @author Jesse Stenroth
+     */
     private class readAreaFeed extends AsyncTask {
         URL url;
         ArrayList<String> ids = new ArrayList();
@@ -90,6 +110,7 @@ public class FinnkinoAPIGetterSettings {
             return ids;
         }
         protected void onPostExecute(Object obj){
+            //after downloading update spinner of areas
             ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, data.getName());
             arrayAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             paikka.setAdapter(arrayAdapter2);
@@ -126,7 +147,11 @@ public class FinnkinoAPIGetterSettings {
 
         }
 
-
+        /**
+         * open stream and connection
+         * @param url url where connect
+         * @return inputStream
+         */
         public InputStream getInputStream(URL url) {
             try {
                 return url.openConnection().getInputStream();
@@ -135,16 +160,35 @@ public class FinnkinoAPIGetterSettings {
             }
         }
 
+        /**
+         * This method return area ids
+         * @return list of ids
+         */
         public ArrayList<String> getIds()
         {
             return ids;
         }
+
+        /**
+         * This method return area names
+         * @return list of names
+         */
         public ArrayList<String> getNames()
         {
             return names;
         }
     }
+
+    /**
+     * This interface make possible sent data to settings
+     * @author Jesse Stenroth
+     */
     public interface getDataToSettings{
+        /**
+         * This method set information of area name ond code
+         * @param name area name
+         * @param code area code (id)
+         */
         public void setArea(String name, String code);
     }
 }
